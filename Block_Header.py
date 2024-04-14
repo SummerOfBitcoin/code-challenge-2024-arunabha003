@@ -37,11 +37,11 @@ def create_block_header(version, prev_block, merkle_root, time, bits, nonce):
 
     return block_header
 
-# Example usage:
-version = 1
-prev_block = '00000000000000000ecdf6f7b15f10fd99b10cfd4f76050a1696b5cc22f29808'
-merkle_root = 'e1de7d3f1a89ed48233c4ed8755309e37ecf50c6e7617167dffe778682ca276f'
-time = 1446952553
-bits = 0x1811a954
-nonce = 3704665741
+# # Example usage:
+# version = 1
+# prev_block = '00000000000000000ecdf6f7b15f10fd99b10cfd4f76050a1696b5cc22f29808'
+# merkle_root = 'e1de7d3f1a89ed48233c4ed8755309e37ecf50c6e7617167dffe778682ca276f'
+# time = 1446952553
+# bits = 0x1811a954
+# nonce = 3704665741
 

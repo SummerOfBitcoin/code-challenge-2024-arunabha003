@@ -13,7 +13,7 @@ def write_to_output(data):
 output_file_path1 = os.path.join('ValidTxn', 'output1.txt')
 
 # 1. Get hash from create_block_header function
-version = 1
+version = 0x20000000
 prev_block = '0000000000000000000000000000000000000000000000000000000000000000'
 merkle_root = MerkleRoot.compute_merkle_root(output_file_path1)
 time = 1713047407
