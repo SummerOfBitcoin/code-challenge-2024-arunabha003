@@ -2,7 +2,7 @@ import os
 import json
 import struct
 import hashlib
-import ecdsa 
+import ecdsa
 
 
 def serialize_transaction(transaction,index):

@@ -10,9 +10,9 @@ def verify_amount(transaction):
     total_output_amount = sum([vout['value'] for vout in transaction['vout']])
     return total_input_amount >= total_output_amount
 
-#Function to verify locktime based on Block Height
+# Function to verify locktime based on Block Height
 def verify_locktime(transaction):
-    current_block_height=839091
+    current_block_height = 839091
     locktime = transaction['locktime']
     return locktime < current_block_height
 
@@ -37,7 +37,7 @@ def verify_signature(transaction):
         elif scriptpubkey_type == 'v1_p2tr':
             return True
         else:
-             # Unknown scriptpubkey type
+            # Unknown scriptpubkey type
             return False
     return True
 
@@ -48,7 +48,15 @@ def double_sha256(data):
 
 # Function to reverse byte order
 def reverse_byte_order(hex_string):
-    return bytes.fromhex(hex_string)[::-1].hex()
+    # Split the hex string into pairs of two characters
+    byte_pairs = [hex_string[i:i+2] for i in range(0, len(hex_string), 2)]
+
+    # Reverse the order of the pairs
+    reversed_byte_pairs = byte_pairs[::-1]
+
+    # Concatenate the pairs back into a single string
+    reversed_hex_string = ''.join(reversed_byte_pairs)
+    return reversed_hex_string
 
 # Main function to iterate through transactions in the mempool folder and verify them
 def verify_transactions():
@@ -58,12 +66,15 @@ def verify_transactions():
         os.makedirs(valid_txn_folder)
 
     mempool_folder = 'mempool'
-    with open(os.path.join(valid_txn_folder, 'output.txt'), 'w') as output_file:
+    with open(os.path.join(valid_txn_folder, 'output1.txt'), 'w') as output_file, \
+            open(os.path.join(valid_txn_folder, 'output2.txt'), 'w') as output2_file:
         # Get the hash of the coinbase transaction and write it to the output file
         coinbase_amount = 100000000  # Example amount in satoshis
         coinbase_script_pub_key = "76a9144c98213638e76470d0ec8de74c14e08c8a06435b88ac"
-        coinbase_serialized_data = create_coinbase_hash(coinbase_amount, coinbase_script_pub_key)
-        output_file.write(f"{coinbase_serialized_data}\n")
+        coinbase_double_Hash = create_coinbase_hash(coinbase_amount, coinbase_script_pub_key)
+        output_file.write(f"{coinbase_double_Hash}\n")
+        reversed_hash = reverse_byte_order(coinbase_double_Hash)
+        output2_file.write(f"{reversed_hash}\n")
 
         # Process other transactions
         for filename in os.listdir(mempool_folder):
@@ -71,10 +82,13 @@ def verify_transactions():
                 with open(os.path.join(mempool_folder, filename), 'r') as file:
                     try:
                         transaction = json.load(file)
-                        if verify_amount(transaction) and verify_signature(transaction) and verify_locktime(transaction):
+                        if verify_amount(transaction) and verify_signature(transaction) and verify_locktime(
+                                transaction):
                             serialized_tx = serialize_transaction(transaction)
                             double_sha256_hash = double_sha256(serialized_tx)
                             output_file.write(f"{double_sha256_hash.hex()}\n")
+                            reversed_hash = reverse_byte_order(double_sha256_hash.hex())
+                            output2_file.write(f"{reversed_hash}\n")
                     except Exception as e:
                         print(f"Error processing transaction {filename}: {e}")
 
