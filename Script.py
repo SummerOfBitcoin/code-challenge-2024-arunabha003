@@ -24,9 +24,8 @@ block_header_hash = block_header.hex()
 write_to_output(block_header_hash)
 
 # 2. Get hash from Coinbase_hash function
-coinbase_amount = 100000000  # Example amount in satoshis
-coinbase_script_pub_key = "76a9144c98213638e76470d0ec8de74c14e08c8a06435b88ac"
-coinbase_hash = Coinbase_hash(coinbase_amount, coinbase_script_pub_key)
+
+coinbase_hash = Coinbase_hash()
 write_to_output(coinbase_hash)
 
 # 3. Read data from ValidTxn/output2.txt and append to output.txt

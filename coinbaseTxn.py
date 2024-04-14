@@ -1,88 +1,87 @@
 import hashlib
 
-def create_coinbase_hash(amount, script_pub_key):
-    serialized_data = ""
+def create_coinbase_hash():
+    version = "01000000"
+    marker = "00"
+    flag = "01"
+    input_count = "01"
+    input_val = "0000000000000000000000000000000000000000000000000000000000000000"
+    vout = "ffffffff"
+    script_size = "19"
+    current_block_height = "b3cd0c"  # In little_endian
+    script_sig = "03" + current_block_height + "184d696e656420627920416e74506f6f6c373946205b8160a4256c0000946e0100"
+    sequence = "ffffffff"
+    output_count = "02"
+    amount1 = "f595814a00000000"
+    script_pubkey_size1 = "19"
+    script_pubkey1 = "76a914edf10a7fac6b32e24daa5305c723f3de58db1bc888ac"
+    amount2 = "0000000000000000"
+    script_pubkey_size2 = "26"
+    script_pubkey2 = "6a24aa21a9edfaa194df59043645ba0f58aad74bfd5693fa497093174d12a4bb3b0574a878db"
+    stack_item = "01"
+    size = "20"
+    item_zero = "0000000000000000000000000000000000000000000000000000000000000000"
+    locktime = "00000000"
 
-    # Version (little-endian)
-    serialized_data += "01000000"
+    # Concatenate the values into a single string
+    concatenated_values = (
+        version + marker + flag + input_count + input_val + vout + script_size +
+        script_sig + sequence + output_count + amount1 + script_pubkey_size1 +
+        script_pubkey1 + amount2 + script_pubkey_size2 + script_pubkey2 + stack_item +
+        size + item_zero + locktime
+    )
 
-    # Number of inputs (always 1 for coinbase)
-    serialized_data += "01"
+    # Convert the concatenated string into bytes
+    concatenated_bytes = bytes.fromhex(concatenated_values)
 
-    # Previous transaction hash (filled with zeros for coinbase)
-    serialized_data += "0" * 64
+    # Compute the double SHA256 hash of the bytes
+    hash_result = hashlib.sha256(hashlib.sha256(concatenated_bytes).digest()).digest()
 
-    # Previous output index (maximum value for coinbase)
-    serialized_data += "ffffffff"
-
-    # Script length for empty coinbase input
-    serialized_data += "00"
-
-    # Sequence number (maximum value for coinbase)
-    serialized_data += "ffffffff"
-
-    # Number of outputs (always 1 for coinbase)
-    serialized_data += "01"
-
-    # Output amount (serialized)
-    serialized_data += format(amount, '016x')[::-1]
-
-    # ScriptPubKey length (half the length of the provided script)
-    serialized_data += format(len(script_pub_key) // 2, '02x')
-
-    # ScriptPubKey (output script)
-    serialized_data += script_pub_key
-
-    # Locktime (always zero for coinbase)
-    serialized_data += "00000000"
-
-    return double_sha256(serialized_data)
-
-
-def Coinbase_hash(amount, script_pub_key):
-    serialized_data = ""
-
-    # Version (little-endian)
-    serialized_data += "01000000"
-
-    # Number of inputs (always 1 for coinbase)
-    serialized_data += "01"
-
-    # Previous transaction hash (filled with zeros for coinbase)
-    serialized_data += "0" * 64
-
-    # Previous output index (maximum value for coinbase)
-    serialized_data += "ffffffff"
-
-    # Script length for empty coinbase input
-    serialized_data += "00"
-
-    # Sequence number (maximum value for coinbase)
-    serialized_data += "ffffffff"
-
-    # Number of outputs (always 1 for coinbase)
-    serialized_data += "01"
-
-    # Output amount (serialized)
-    serialized_data += format(amount, '016x')[::-1]
-
-    # ScriptPubKey length (half the length of the provided script)
-    serialized_data += format(len(script_pub_key) // 2, '02x')
-
-    # ScriptPubKey (output script)
-    serialized_data += script_pub_key
-
-    # Locktime (always zero for coinbase)
-    serialized_data += "00000000"
-
-    return serialized_data
+    # Return the double SHA256 hash as a hexadecimal string
+    return hash_result.hex()
 
 
+def Coinbase_hash():
+    version = "01000000"
+    marker = "00"
+    flag = "01"
+    input_count = "01"
+    input_val = "0000000000000000000000000000000000000000000000000000000000000000"
+    vout = "ffffffff"
+    script_size = "19"
+    current_block_height = "b3cd0c"  # In little_endian
+    script_sig = "03" + current_block_height + "184d696e656420627920416e74506f6f6c373946205b8160a4256c0000946e0100"
+    sequence = "ffffffff"
+    output_count = "02"
+    amount1 = "f595814a00000000"
+    script_pubkey_size1 = "19"
+    script_pubkey1 = "76a914edf10a7fac6b32e24daa5305c723f3de58db1bc888ac"
+    amount2 = "0000000000000000"
+    script_pubkey_size2 = "26"
+    script_pubkey2 = "6a24aa21a9edfaa194df59043645ba0f58aad74bfd5693fa497093174d12a4bb3b0574a878db"
+    stack_item = "01"
+    size = "20"
+    item_zero = "0000000000000000000000000000000000000000000000000000000000000000"
+    locktime = "00000000"
 
-def double_sha256(data):
-    hash1 = hashlib.sha256(data.encode()).digest()
-    hash2 = hashlib.sha256(hash1).digest()
-    return hash2.hex()
+    # Concatenate the values into a single string
+    concatenated_values = (
+        version + marker + flag + input_count + input_val + vout + script_size +
+        script_sig + sequence + output_count + amount1 + script_pubkey_size1 +
+        script_pubkey1 + amount2 + script_pubkey_size2 + script_pubkey2 + stack_item +
+        size + item_zero + locktime
+    )
+
+   
 
 
+   
+    return concatenated_values
 
+
+# # Test the functions
+# double_sha256 = create_coinbase_hash()
+# print("Double SHA256 hash:", double_sha256)
+
+# hash_concatenated = Coinbase_hash()
+# print("Hash after concatenating:", hash_concatenated)

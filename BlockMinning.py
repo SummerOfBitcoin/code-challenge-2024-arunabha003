@@ -2,6 +2,9 @@ import hashlib
 import MerkleRoot
 import os
 
+
+# Target hash
+target = '0000ffff00000000000000000000000000000000000000000000000000000000'
 # Utility Functions
 
 # The hash function used in mining (convert hexadecimal to binary first, then SHA256 twice)
@@ -42,7 +45,7 @@ def mine_block(target):
         result = reverse_bytes(hash256(attempt))
 
         # show result
-        # print(f"{nonce}: {result}")
+        print(f"{nonce}: {result}")
 
         # end if we get a block hash below the target
         if int(result, 16) < int(target, 16):
@@ -51,8 +54,7 @@ def mine_block(target):
         # increment the nonce and try again...
         nonce += 1
 
-# Target hash
-target = '0000ffff00000000000000000000000000000000000000000000000000000000'
+
 
 # # Mine for the block with the given target hash
 # mined_nonce = mine_block(target)

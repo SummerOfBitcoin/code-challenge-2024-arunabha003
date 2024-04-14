@@ -69,9 +69,8 @@ def verify_transactions():
     with open(os.path.join(valid_txn_folder, 'output1.txt'), 'w') as output_file, \
             open(os.path.join(valid_txn_folder, 'output2.txt'), 'w') as output2_file:
         # Get the hash of the coinbase transaction and write it to the output file
-        coinbase_amount = 100000000  # Example amount in satoshis
-        coinbase_script_pub_key = "76a9144c98213638e76470d0ec8de74c14e08c8a06435b88ac"
-        coinbase_double_Hash = create_coinbase_hash(coinbase_amount, coinbase_script_pub_key)
+
+        coinbase_double_Hash = create_coinbase_hash()
         output_file.write(f"{coinbase_double_Hash}\n")
         reversed_hash = reverse_byte_order(coinbase_double_Hash)
         output2_file.write(f"{reversed_hash}\n")
