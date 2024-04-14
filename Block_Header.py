@@ -35,6 +35,7 @@ def create_block_header(version, prev_block, merkle_root, time, bits, nonce):
     # Concatenate all serialized fields
     block_header = serialized_version + serialized_prev_block + serialized_merkle_root + serialized_time + serialized_bits + serialized_nonce
 
+   # print(block_header.hex())
     return block_header
 
 # # Example usage:
