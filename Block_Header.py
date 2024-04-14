@@ -18,10 +18,10 @@ def create_block_header(version, prev_block, merkle_root, time, bits, nonce):
     serialized_version = struct.pack('<I', version)
 
     # Serialize previous block (natural byte order 32 bytes)
-    serialized_prev_block = bytes.fromhex(reverse_byte_order(prev_block))
+    serialized_prev_block = bytes.fromhex(prev_block)
 
     # Serialize merkle root (natural byte order 32 bytes)
-    serialized_merkle_root = bytes.fromhex(reverse_byte_order(merkle_root))
+    serialized_merkle_root = bytes.fromhex(merkle_root)
 
     # Serialize time (little-endian 4 bytes)
     serialized_time = struct.pack('<I', time)
