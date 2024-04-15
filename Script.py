@@ -1,4 +1,4 @@
-from Block_Header import create_block_header
+from Block_Header2 import create_block_header
 from coinbaseTxn import Coinbase_hash
 import MerkleRoot
 import BlockMinning
@@ -13,15 +13,14 @@ def write_to_output(data):
 output_file_path1 = os.path.join('ValidTxn', 'output1.txt')
 
 # 1. Get hash from create_block_header function
-# version = 2
-# prev_block = '0000000000000000000000000000000000000000000000000000000000000000'
-# merkle_root = MerkleRoot.compute_merkle_root(output_file_path1)
-# time = 1713157700
-# bits = 0x1f00ffff
-# nonce = BlockMinning.mine_block('0000ffff00000000000000000000000000000000000000000000000000000000')
-# block_header = create_block_header(version, prev_block, merkle_root, time, bits, nonce)
-# block_header_hash = block_header.hex()
-block_header_hash='000000200000000000000000000000000000000000000000000000000000000000000000d485ebca2cf31727c818fae4626da404ab6ca2a97e6e1b2f9d15e7257e4c22f96f071b66ffff001f'
+version = 0x20000000
+prev_block = '0000000000000000000000000000000000000000000000000000000000000000'
+merkle_root = MerkleRoot.compute_merkle_root(output_file_path1)
+time = 1713047407 
+bits = '1f00ffff'
+nonce = BlockMinning.mine_block('0000ffff00000000000000000000000000000000000000000000000000000000')
+block_header = create_block_header(version, prev_block, merkle_root, time, bits, nonce)
+block_header_hash = block_header
 write_to_output(block_header_hash)
 
 # 2. Get hash from Coinbase_hash function
