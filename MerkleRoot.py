@@ -38,7 +38,7 @@ def compute_merkle_root(file_path):
         txids = [line.strip() for line in file]
 
     # TXIDs must be in natural byte order when creating the merkle root
-    txids = [txid[::-1] for txid in txids]
+    #txids = [txid[::-1] for txid in txids]
 
     # Compute the merkle root
     #print(merkle_root(txids))
