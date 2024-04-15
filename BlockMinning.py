@@ -32,7 +32,7 @@ def mine_block(target):
     prevblock  = '0000000000000000000000000000000000000000000000000000000000000000'
     merkleroot = MerkleRoot.compute_merkle_root(output_file_path) #a41f20b5e403758290a686399c16e4a4f8ee3c971472aa7a424f33127ca85b06
     time       = 1713047407  
-    bits       = '0500ffff'
+    bits       = 'ffff0005'
     nonce      = 0             #274148111
 
     # Block Header (Serialized)
