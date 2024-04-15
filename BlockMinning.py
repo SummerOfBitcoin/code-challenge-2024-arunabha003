@@ -37,6 +37,7 @@ def mine_block(target):
 
     # Block Header (Serialized)
     header = reverse_bytes(field(version, 4)) + reverse_bytes(prevblock) + reverse_bytes(merkleroot) + reverse_bytes(field(time, 4)) + reverse_bytes(bits)
+    #print(header)
 
     # Mine!
     while True:
@@ -45,7 +46,7 @@ def mine_block(target):
         result = reverse_bytes(hash256(attempt))
 
         # show result
-        #print(f"{nonce}: {result}")
+        print(f"{nonce}: {result}")
 
         # end if we get a block hash below the target
         if int(result, 16) < int(target, 16):
