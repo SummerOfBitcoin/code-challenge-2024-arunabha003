@@ -41,6 +41,7 @@ def compute_merkle_root(file_path):
     # txids = [txid[::-1] for txid in txids]
 
     # Compute the merkle root
+    #print(merkle_root(txids))
     return merkle_root(txids)
 
 
