@@ -4,7 +4,7 @@ import os
 
 
 # Target hash
-target = '0000ffff00000000000000000000000000000000000000000000000000000000'
+#target = '0000ffff00000000000000000000000000000000000000000000000000000000'
 # Utility Functions
 
 # The hash function used in mining (convert hexadecimal to binary first, then SHA256 twice)
