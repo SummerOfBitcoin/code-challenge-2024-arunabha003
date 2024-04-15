@@ -34,8 +34,8 @@ def verify_signature(transaction):
             message = v0_p2wpkh_verification.serialize_transaction(transaction, index)
             if not v0_p2wpkh_verification.verify_ecdsa_signature(public_key, signature, message):
                 return False
-        elif scriptpubkey_type == 'v1_p2tr':
-            return True
+        # elif scriptpubkey_type == 'v1_p2tr':
+        #     return True
         else:
             # Unknown scriptpubkey type
             return False
