@@ -14,7 +14,7 @@ output_file_path1 = os.path.join('ValidTxn', 'output1.txt')
 
 # 1. Get hash from create_block_header function
 version = 2
-prev_block = '0000000000000000000000000000000000000000000000000000000000000000'
+prev_block = '0000000000000000000205e5b86991b1b0a370fb7e2b7126d32de18e48e556c4'
 merkle_root = MerkleRoot.compute_merkle_root(output_file_path1)
 time = 1713157700
 bits = 0x1f00ffff
