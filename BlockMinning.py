@@ -46,7 +46,7 @@ def mine_block(target):
         result = reverse_bytes(hash256(attempt))
 
         # show result
-        print(f"{nonce}: {result}")
+        #print(f"{nonce}: {result}")
 
         # end if we get a block hash below the target
         if int(result,16) < int(target,16):
