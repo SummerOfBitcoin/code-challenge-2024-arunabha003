@@ -31,7 +31,7 @@ def mine_block(target):
     version    = 0x20000000
     prevblock  = '0000000000000000000000000000000000000000000000000000000000000000'
     merkleroot = MerkleRoot.compute_merkle_root(output_file_path) #a41f20b5e403758290a686399c16e4a4f8ee3c971472aa7a424f33127ca85b06
-    time       = 1713367622  
+    time       = 1713381602  
     bits       = '1f00ffff'
     nonce      = 0             #274148111
 
