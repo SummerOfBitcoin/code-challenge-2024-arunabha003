@@ -25,7 +25,7 @@ def reverse_bytes(data):
 # Function to mine for a block with the given target hash
 def mine_block(target):
     # Path to the "output.txt" file inside the "ValidTx" folder
-    output_file_path = os.path.join('ValidTxn', 'output1.txt')
+    output_file_path = os.path.join('ValidTxn', 'output2.txt')
 
     # Block Header (Fields)
     version    = 0x20000000
