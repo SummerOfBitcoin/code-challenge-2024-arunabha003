@@ -36,7 +36,7 @@ def mine_block(target):
     nonce      = 0             #274148111
 
     # Block Header (Serialized)
-    header = reverse_bytes(field(version, 4)) + reverse_bytes(prevblock) + reverse_bytes(merkleroot) + reverse_bytes(field(time, 4)) + reverse_bytes(bits)
+    header = reverse_bytes(field(version, 4)) + reverse_bytes(prevblock) + merkleroot + reverse_bytes(field(time, 4)) + reverse_bytes(bits)
     #print(header)
 
     # Mine!
