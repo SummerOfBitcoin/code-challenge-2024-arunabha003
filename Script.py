@@ -27,7 +27,7 @@ write_to_output(block_header_hash)
 # 2. Get hash from Coinbase_hash function
 
 coinbase_hash = Coinbase_hash()
-#write_to_output(coinbase_hash)
+write_to_output(coinbase_hash)
 
 # 3. Read data from ValidTxn/output2.txt and append to output.txt
 results_file_path = os.path.join("ValidTxn", "output2.txt")
