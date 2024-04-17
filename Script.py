@@ -34,3 +34,5 @@ results_file_path = os.path.join("ValidTxn", "output2.txt")
 with open(results_file_path, "r") as results_file:
     for line in results_file:
         write_to_output(line.strip())
+
+
