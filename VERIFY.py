@@ -1,74 +1,14 @@
-import os
-import json
-
-# Function to verify if total amount of inputs (vin) is greater than total amount of outputs (vout)
-def verify_amount(transaction):
-    total_input_amount = sum([vin['prevout']['value'] for vin in transaction['vin']])
-    total_output_amount = sum([vout['value'] for vout in transaction['vout']])
-    return total_input_amount >= total_output_amount
-
-#Function to verify locktime based on Block Height
-def verify_locktime(transaction):
-    current_block_height=839091
-    locktime = transaction['locktime']
-    return locktime < current_block_height
+import hashlib
 
 
-# Function to verify signature for each input of a transaction
-def verify_signature(transaction):
-    for index, vin in enumerate(transaction['vin']):
-        scriptpubkey_type = vin['prevout']['scriptpubkey_type']
-        if scriptpubkey_type == 'p2pkh':
-            import p2pkh_verification
-            signature = vin['scriptsig_asm'].split()[-3]
-            public_key = vin['scriptsig_asm'].split()[-1]
-            message = p2pkh_verification.serialize_transaction(transaction, index)
-            if not p2pkh_verification.verify_ecdsa_signature(public_key, signature, message):
-                return False
-        elif scriptpubkey_type == 'v0_p2wpkh':
-            import v0_p2wpkh_verification
-            signature = vin['witness'][0]
-            public_key = vin['witness'][1]
-            message = v0_p2wpkh_verification.serialize_transaction(transaction, index)
-            if not v0_p2wpkh_verification.verify_ecdsa_signature(public_key, signature,message):
-                return False
-        # elif scriptpubkey_type == 'p2sh':
-        #     import verify_p2sh_signature
-        #     if not verify_p2sh_signature.verify(transaction, vin):
-        #         return False
-        # elif scriptpubkey_type == 'v0_p2sh':
-        #     import verify_v0_p2sh_signature
-        #     if not verify_v0_p2sh_signature.verify(transaction, vin):
-        #         return False
-        elif scriptpubkey_type == 'v1_p2tr':
-                return True
-        else:
-             # Unknown scriptpubkey type
-            return False
-    return True
+def hash256(data):
+    binary = bytes.fromhex(data)
+    hash1 = hashlib.sha256(binary).digest()
+    hash2 = hashlib.sha256(hash1).hexdigest()
+    return hash2
 
+def reverse_bytes(data):
+    return ''.join(reversed([data[i:i+2] for i in range(0, len(data), 2)]))
 
-# Main function to iterate through transactions in the mempool folder and verify them
-def verify_transactions():
-    result_folder = 'Results'
-    output_file = os.path.join(result_folder, 'output.txt')
-
-
-    with open(output_file, 'w') as output:
-        mempool_folder = 'mempool'
-        for filename in os.listdir(mempool_folder):
-            if filename.endswith('.json'):
-                with open(os.path.join(mempool_folder, filename), 'r') as file:
-                    try:
-                        transaction = json.load(file)
-                        if verify_amount(transaction) and verify_signature(transaction) and verify_locktime(transaction):
-                            output.write(f"Transaction {filename} is valid.\n")
-                        else:
-                            output.write(f"Transaction {filename} is invalid.\n")
-                    except Exception as e:
-                        output.write(f"Error processing transaction {filename}: {e}\n")
-
-if __name__ == "__main__":
-    verify_transactions()
-
-
+hash=reverse_bytes(hash256("000000200000000000000000000000000000000000000000000000000000000000000000f9224c7e25e7159d2f1b6e7ea9a26cab04a46d62e4fa18c82717f32ccaeb85d46f071b66ffff001f71cb0000"))
+print(hash)

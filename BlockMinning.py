@@ -36,27 +36,27 @@ def mine_block(target):
     nonce      = 0             #274148111
 
     # Block Header (Serialized)
-    header = reverse_bytes(field(version, 4)) + reverse_bytes(prevblock) + reverse_bytes(merkleroot) + reverse_bytes(field(time, 4)) + reverse_bytes(bits)
+    header = reverse_bytes(field(version, 4)) + reverse_bytes(prevblock) + merkleroot + reverse_bytes(field(time, 4)) + reverse_bytes(bits)
     #print(header)
 
     # Mine!
     while True:
         # hash the block header
         attempt = header + reverse_bytes(field(nonce, 4))
-        result = hash256(attempt)
+        result = reverse_bytes(hash256(attempt))
 
         # show result
-        #print(f"{nonce}: {result}")
+        print(f"{nonce}: {result}")
 
         # end if we get a block hash below the target
-        if int(result, 16) < int(target, 16):
+        if int(result,16) < int(target,16):
             return nonce
 
         # increment the nonce and try again...
         nonce += 1
 
         # Remove the previously added nonce before the next iteration
-        header = header[:-8]  # Assuming nonce is represented by 4 bytes (8 hexadecimal characters)
+        attempt = attempt[:-8] # Assuming nonce is represented by 4 bytes (8 hexadecimal characters)
 
 
 # # Mine for the block with the given target hash
