@@ -8,5 +8,5 @@ def field(data, size):
 
 def create_block_header(version,prev_block,Merkle_Root,time,bits,nonce):
  header = reverse_bytes(field(version, 4)) + reverse_bytes(prev_block) + reverse_bytes(Merkle_Root) + reverse_bytes(field(time, 4)) + reverse_bytes(bits)+reverse_bytes(field(nonce, 4))
- #print(header)
+ print(header)
  return header
