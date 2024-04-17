@@ -16,7 +16,7 @@ output_file_path1 = os.path.join('ValidTxn', 'output1.txt')
 version = 0x20000000
 prev_block = '0000000000000000000000000000000000000000000000000000000000000000'
 merkle_root = MerkleRoot.compute_merkle_root(output_file_path1)
-time = 1713047407 
+time = 1713367622 
 bits = '1f00ffff'
 nonce = BlockMinning.mine_block('0000ffff00000000000000000000000000000000000000000000000000000000')
 #print(nonce)
