@@ -46,6 +46,6 @@ def compute_merkle_root(file_path):
 
     # Compute the merkle root
     #print(merkle_root(txids))
-    return merkle_root(txids)
+    return reverse_bytes(merkle_root(txids))
 
 
