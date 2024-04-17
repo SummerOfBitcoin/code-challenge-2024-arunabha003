@@ -18,7 +18,7 @@ prev_block = '0000000000000000000000000000000000000000000000000000000000000000'
 merkle_root = MerkleRoot.compute_merkle_root(output_file_path1)
 time = 1713047407 
 bits = '1f00ffff'
-nonce = BlockMinning.mine_block('0000ffff00000000000000000000000000000000000000000000000000000000')+1
+nonce = BlockMinning.mine_block('0000ffff00000000000000000000000000000000000000000000000000000000')
 #print(nonce)
 block_header = create_block_header(version, prev_block, merkle_root, time, bits, nonce)
 block_header_hash = block_header
