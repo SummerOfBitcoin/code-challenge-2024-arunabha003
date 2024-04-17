@@ -9,6 +9,10 @@ def hash256(hex_str):
     result = hash2.hex()
     return result
 
+# Reverse the order of bytes (often happens when working with raw bitcoin data)
+def reverse_bytes(data):
+    return ''.join(reversed([data[i:i+2] for i in range(0, len(data), 2)]))
+
 def merkle_root(txids):
     # Exit Condition: Stop recursion when we have one hash result left
     if len(txids) == 1:
@@ -38,7 +42,7 @@ def compute_merkle_root(file_path):
         txids = [line.strip() for line in file]
 
     # TXIDs must be in natural byte order when creating the merkle root
-    #txids = [txid[::-1] for txid in txids]
+    reverse_bytes(txids)
 
     # Compute the merkle root
     #print(merkle_root(txids))
