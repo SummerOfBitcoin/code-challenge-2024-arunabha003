@@ -15,7 +15,7 @@ def write_to_output(data):
         file.write(data + "\n")
 
 # Path to the "output.txt" file inside the "ValidTx" folder
-output_file_path1 = os.path.join('ValidTxn', 'output1.txt')
+output_file_path1 = os.path.join('ValidTxn', 'output2.txt')
 
 # 1. Get hash from create_block_header function
 version = 0x20000000
