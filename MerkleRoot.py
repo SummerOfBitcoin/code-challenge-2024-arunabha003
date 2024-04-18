@@ -35,7 +35,7 @@ def compute_merkle_root(file_path):
 
 
     CalculatedMerkleRoot = merkleCalculator(txids)
-    print(CalculatedMerkleRoot)
+    #print(CalculatedMerkleRoot)
 
     return CalculatedMerkleRoot
    
