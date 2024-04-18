@@ -22,6 +22,11 @@ def field(data, size):
 def reverse_bytes(data):
     return ''.join(reversed([data[i:i+2] for i in range(0, len(data), 2)]))
 
+def reverse_hex(data):
+    byte_data = bytes.fromhex(data)
+    reversed_bytes = bytes(reversed(byte_data))
+    return reversed_bytes.hex()
+
 # Function to mine for a block with the given target hash
 def mine_block(target):
     # Path to the "output.txt" file inside the "ValidTx" folder
