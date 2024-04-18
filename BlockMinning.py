@@ -1,11 +1,16 @@
 import hashlib
 import MerkleRoot
 import os
+import time
 
 
 # Target hash
 #target = '0000ffff00000000000000000000000000000000000000000000000000000000'
 # Utility Functions
+
+
+def get_unix_time():
+    return int(time.time())
 
 # The hash function used in mining (convert hexadecimal to binary first, then SHA256 twice)
 def hash256(data):
@@ -36,7 +41,7 @@ def mine_block(target):
     version    = 0x20000000
     prevblock  = '0000000000000000000000000000000000000000000000000000000000000000'
     merkleroot = MerkleRoot.compute_merkle_root(output_file_path) 
-    time       = 1713419171  
+    time       = get_unix_time()  
     bits       = '1f00ffff'
     nonce      = 0             #274148111
 

@@ -3,6 +3,11 @@ from coinbaseTxn import Coinbase_hash
 import MerkleRoot
 import BlockMinning
 import os
+import time
+
+
+def get_unix_time():
+    return int(time.time())
 
 # Function to write data to output.txt
 def write_to_output(data):
@@ -16,7 +21,7 @@ output_file_path1 = os.path.join('ValidTxn', 'output2.txt')
 version = 0x20000000
 prev_block = '0000000000000000000000000000000000000000000000000000000000000000'
 merkle_root = MerkleRoot.compute_merkle_root(output_file_path1)
-time = 1713419171 
+time = get_unix_time() 
 bits = '1f00ffff'
 nonce = BlockMinning.mine_block('0000ffff00000000000000000000000000000000000000000000000000000000')
 #print(nonce)

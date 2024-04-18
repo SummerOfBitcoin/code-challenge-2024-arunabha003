@@ -1,6 +1,7 @@
 # Reverse the order of bytes (often happens when working with raw bitcoin data)
 def reverse_bytes(data):
     return ''.join(reversed([data[i:i+2] for i in range(0, len(data), 2)]))
+    
 
 def reverse_hex(data):
     byte_data = bytes.fromhex(data)
