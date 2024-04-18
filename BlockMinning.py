@@ -35,7 +35,7 @@ def reverse_hex(data):
 # Function to mine for a block with the given target hash
 def mine_block(target):
     # Path to the "output.txt" file inside the "ValidTx" folder
-    output_file_path = os.path.join('ValidTxn', 'output1.txt')
+    output_file_path = os.path.join('ValidTxn', 'output2.txt')
 
     # Block Header (Fields)
     version    = 0x20000000
@@ -46,7 +46,7 @@ def mine_block(target):
     nonce      = 0             #274148111
 
     # Block Header (Serialized)
-    header = reverse_bytes(field(version, 4)) + reverse_bytes(prevblock) + reverse_bytes(merkleroot) + reverse_bytes(field(time, 4)) + reverse_bytes(bits)
+    header = reverse_bytes(field(version, 4)) + reverse_bytes(prevblock) + merkleroot + reverse_bytes(field(time, 4)) + reverse_bytes(bits)
     #print(header)
 
     # Mine!
