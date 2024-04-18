@@ -39,7 +39,7 @@ def compute_merkle_root(file_path):
 
 
     CalculatedMerkleRoot = reverse_bytes(merkleCalculator(txids))
-    print(CalculatedMerkleRoot)
+    #print(CalculatedMerkleRoot)
 
     return CalculatedMerkleRoot
    

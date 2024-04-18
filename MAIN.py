@@ -27,13 +27,13 @@ def verify_signature(transaction):
             message = p2pkh_verification.serialize_transaction(transaction, index)
             if not p2pkh_verification.verify_ecdsa_signature(public_key, signature, message):
                 return False
-        elif scriptpubkey_type == 'v0_p2wpkh':
-            import v0_p2wpkh_verification
-            signature = vin['witness'][0]
-            public_key = vin['witness'][1]
-            message = v0_p2wpkh_verification.serialize_transaction(transaction, index)
-            if not v0_p2wpkh_verification.verify_ecdsa_signature(public_key, signature, message):
-                return False
+        # elif scriptpubkey_type == 'v0_p2wpkh':
+        #     import v0_p2wpkh_verification
+        #     signature = vin['witness'][0]
+        #     public_key = vin['witness'][1]
+        #     message = v0_p2wpkh_verification.serialize_transaction(transaction, index)
+        #     if not v0_p2wpkh_verification.verify_ecdsa_signature(public_key, signature, message):
+        #         return False
         # elif scriptpubkey_type == 'v1_p2tr':
         #     return True
         else:
