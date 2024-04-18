@@ -2,6 +2,10 @@ import hashlib
 import binascii
 import os
 
+# Reverse the order of bytes (often happens when working with raw bitcoin data)
+def reverse_bytes(data):
+    return ''.join(reversed([data[i:i+2] for i in range(0, len(data), 2)]))
+
 def hashIt(firstTxHash, secondTxHash):
     # Reverse inputs before and after hashing
     # due to big-endian
@@ -34,8 +38,8 @@ def compute_merkle_root(file_path):
         txids = [line.strip() for line in file]
 
 
-    CalculatedMerkleRoot = merkleCalculator(txids)
-    #print(CalculatedMerkleRoot)
+    CalculatedMerkleRoot = reverse_bytes(merkleCalculator(txids))
+    print(CalculatedMerkleRoot)
 
     return CalculatedMerkleRoot
    
